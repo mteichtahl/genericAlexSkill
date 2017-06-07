@@ -13,7 +13,7 @@ PACK="$DATE-$PACKAGE_FILE_NAME"
 zip -r $PACK node_modules/ speechAssets/ handlers/ lib/ index.js
 aws s3 cp ./$PACK s3://$S3_BUCKET/ 
 
-aws cloudformation create-stack --stack-name $STACK_NAME --template-body file://cfn.json --region $REGION --parameters \
+aws cloudformation create-stack --stack-name $STACK_NAME --template-body file://lambdaStackCfn.json --region $REGION --parameters \
 ParameterKey=FunctionName,ParameterValue=$LAMBDA_FUNCTION_NAME \
 ParameterKey=BucketName,ParameterValue=$S3_BUCKET \
 ParameterKey=PackagePath,ParameterValue=$PACK --capabilities CAPABILITY_IAM 

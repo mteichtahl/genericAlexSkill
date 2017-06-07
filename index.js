@@ -1,17 +1,19 @@
 var Alexa = require('alexa-sdk')
 var handlers = require('lib/handle')()
 
-var states = {
-  GUESSMODE: '_GUESSMODE', // User is trying to guess the number.
-  STARTMODE: '_STARTMODE' // Prompt the user to start or restart the game.
-}
+var APP_ID = undefined
+var SKILL_NAME = 'alexaSkill'
 
 exports.handler = function (event, context, callback) {
-  var alexa = Alexa.handler(event, context, callback)
+  var alexa = Alexa.handler(event, context)
+  alexa.appId = APP_ID
 
-  handlers.init()
+  handlers.init({
+    'alexa': alexa
+  })
 
-  console.log(`loaded ${handlers.count()} handlers`)
+  handlers.register()
+  alexa.execute()
 
   callback(null, 'ok')
 }

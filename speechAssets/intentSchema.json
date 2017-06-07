@@ -1,3 +1,9 @@
 {
-
+  "intents": [{
+      "intent": "IntroduceIntent"
+    },
+    {
+      "intent": "UnhandledIntent"
+    }
+  ]
 }
